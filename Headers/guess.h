@@ -1,6 +1,7 @@
 #include <set>
 #include <vector>
 #include "io.h"
+#include "colour.h"
 using namespace std;
 
 enum guessColor{
@@ -45,5 +46,25 @@ public:
                 }
             }
         }
+    }
+
+    void printGuess(){
+        for(int i = 0; i < _wordGuess.size(); i++){
+            switch(_wordGuessColor[i]){
+                case Green:
+                    Colour::printChar(Colour::colourType::Green,_wordGuess[i]);
+                    break;
+                case Yellow:
+                    Colour::printChar(Colour::colourType::Yellow,_wordGuess[i]);
+                    break;
+                case Grey:
+                    Colour::printChar(Colour::colourType::Grey,_wordGuess[i]);
+                    break;
+                default:
+                    cout<<"Error, undefined colour\n";
+            }
+        }
+
+        cout<<"\n";
     }
 };

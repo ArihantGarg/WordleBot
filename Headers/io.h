@@ -8,7 +8,7 @@ using namespace std;
 void fillVectorFromFileStream(vector<string>& vectorToFill,ifstream& FileInput){
     string curWord;
     while(FileInput >> curWord){
-        vectorToFill.push_back(curWord);
+        vectorToFill.push_back(toUpper(curWord));
     }
 }
 

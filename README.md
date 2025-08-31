@@ -9,3 +9,4 @@ Note the following :
 5) main.cpp : Contains the main function and drives the program
 6) io.h : Contains the input/output functions from the files used in the project
 7) README.md : Contains the documentation for the project
+8) Makefile : Commands to run the project
