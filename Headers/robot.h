@@ -14,9 +14,12 @@ int calcHash(vector<guessColor> v){
 }
 
 void robot(){
-    ofstream printToOutFile("out_sooey.txt"); // Set to out_FIRSTWORD.txt
+    ofstream printToOutFile("out_raise.txt"); // Set to out_FIRSTWORD.txt
     printToOutFile << "Robot starting...\n";
     printToOutFile.flush();
+
+    int currentWordCount = 0;
+    int currentGuessCount = 0;
 
     for(auto wordToGuess:possibleAnswerWordList){
         answerWord = wordToGuess;
@@ -50,13 +53,6 @@ void robot(){
                 }
 
                 curAnswerWordList = updatedAnswerWordList;
-                cout << "Current Size : " << curAnswerWordList.size()<<"\n";
-                if(curAnswerWordList.size() <= 10){
-                    for(auto word:curAnswerWordList){
-                        cout << word << " ";
-                    }
-                    cout<<"\n";
-                }
             }
 
             // Optimization
@@ -70,7 +66,6 @@ void robot(){
                 Guess guessResult(previousGuess,answerWord);
                 guessResult.printGuess();
                 previousHashValue = calcHash(guessResult.getVectorGuessColor());
-                cout << previousHashValue <<"\n";
                 continue;
             }
             else if(numGuesses == 1 && previousHashValue == 242){
@@ -83,7 +78,6 @@ void robot(){
                 Guess guessResult(previousGuess,answerWord);
                 guessResult.printGuess();
                 previousHashValue = calcHash(guessResult.getVectorGuessColor());
-                cout << previousHashValue <<"\n";
                 continue;
             }
 
@@ -108,7 +102,6 @@ void robot(){
                 Guess guessResult(previousGuess,answerWord);
                 guessResult.printGuess();
                 previousHashValue = calcHash(guessResult.getVectorGuessColor());
-                cout << previousHashValue <<"\n";
                 cout.flush();
 
                 continue;
@@ -135,6 +128,7 @@ void robot(){
                 else if(!flagIsBestGuessPresentInAnswerList && curGuessMaxSize == bestGuessMinSize && find(curAnswerWordList.begin(),curAnswerWordList.end(),possibleGuess)!=curAnswerWordList.end()){
                     bestGuess = possibleGuess;
                     bestGuessMinSize = curGuessMaxSize;
+                    flagIsBestGuessPresentInAnswerList = true;
                 }
             }
 
@@ -149,7 +143,6 @@ void robot(){
             Guess guessResult(previousGuess,answerWord);
             guessResult.printGuess();
             previousHashValue = calcHash(guessResult.getVectorGuessColor());
-            cout << previousHashValue <<"\n";
             cout.flush();
         }
         while(previousGuess != answerWord);
@@ -158,5 +151,9 @@ void robot(){
 
         printToOutFile << answerWord << " " << numGuesses << "\n";
         printToOutFile.flush();
+
+        currentGuessCount += numGuesses;
+        currentWordCount += 1;
+        printToOutFile << ((double)(currentGuessCount))/(currentWordCount) << "\n";
     }
 }
