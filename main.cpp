@@ -15,6 +15,5 @@ int main(){
     }
     else {
         cout << "Error : IS_HUMAN_PLAYING should be set to either 1 or 0\n";
-        return 0;
     }
 }
